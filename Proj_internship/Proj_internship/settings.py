@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'Proj_internship.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Proj',
+        'HOST': 'localhost',
+        'PASSWORD': '1104947kp',
+        'USER': 'root',
+        'PORT': '3306',
     }
 }
 
