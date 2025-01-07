@@ -85,7 +85,12 @@
                 <label for="re-password">Re-enter Password</label>
                 <input type="password" id="re-password" name="re-password" required>
             </div>
-            {{ err }}
+             {% if e %}
+                <p>{{ e }}</p>
+             {% endif %}
+             {% if err %}
+                <p>{{ err }}</p>
+             {% endif %}
             <input type="submit" value="Register">
         </form>
         <div class="login-link">

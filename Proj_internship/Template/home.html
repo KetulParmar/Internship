@@ -84,8 +84,7 @@
         <p>Your journey starts here. Please log in or register to continue.</p>
         <a href="login" class="button">Login</a>
         <a href="register" class="button">Register</a>
-         <a href="info" class="button">All info</a>
-        {{ MSSG }}
+
     </div>
     <div class="container">
         <h2>User List</h2>
@@ -99,12 +98,14 @@
                 </tr>
             </thead>
             <tbody>
+                {% for i in data %}
                 <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>john@example.com</td>
-                    <td>password123</td>
+                    <td>{{ i.id }}</td>
+                    <td>{{ i.Name }}</td>
+                    <td>{{ i.Email }}</td>
+                    <td>{{ i.Password }}</td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

@@ -76,7 +76,9 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="pass" required>
             </div>
-            {{ err }}
+            {% if err %}
+                <p>{{ err }}</p>
+            {% endif %}
             <input type="submit" value="Login">
         </form>
         <div class="register-link">
