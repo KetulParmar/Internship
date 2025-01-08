@@ -7,7 +7,5 @@ class Info(models.Model):
     Email = models.EmailField()
     Password = models.CharField(max_length=8)
 
-    def __str__(self):
-        return f"{self.Name} - {self.Email} - {self.Password}"
 
 
