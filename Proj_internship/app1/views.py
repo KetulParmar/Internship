@@ -59,7 +59,6 @@ def forget(request, id):
     return render(request, 'forget.html')
 
 def Otp(request, id):
-    if request.method == 'POST':
-       pass
+    pass
 
 
