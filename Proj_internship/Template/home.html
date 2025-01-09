@@ -95,6 +95,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Password</th>
+                    <th colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -104,6 +105,8 @@
                     <td>{{ i.Name }}</td>
                     <td>{{ i.Email }}</td>
                     <td>{{ i.Password }}</td>
+                    <td><a href="edit/{{ i.id }}">Edit</a></td>
+                    <td><a href="delete/{{ i.id }}">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
