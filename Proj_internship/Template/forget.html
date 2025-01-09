@@ -109,12 +109,15 @@
       <h2>Forgot Password</h2>
       <p>Please enter your email address to reset your password.</p>
 
-      <form action="#">
+      <form action="/forget/{{ id }}" method="post">
+          {% csrf_token %}
         <div class="input-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+          <input type="email" id="email" name="Email" placeholder="Enter your email" required>
         </div>
-
+        {% if Err %}
+          <p>{{ Err }}</p>
+        {% endif %}
         <div class="submit-btn">
           <button type="submit">Send OTP</button>
         </div>

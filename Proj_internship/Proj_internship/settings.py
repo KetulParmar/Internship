@@ -128,8 +128,8 @@ from django.core.mail.backends.smtp import EmailBackend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = 'ketul4947@gmail.com'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = 'rnpm kifr lavj cbep'
-EMAIL_PORT = '127.0.0.1'
+EMAIL_HOST_PASSWORD = 'plng kcuo eyli hjjh'
+EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USER_SSL = False
 fail_silently = False
