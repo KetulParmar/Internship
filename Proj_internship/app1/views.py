@@ -107,19 +107,19 @@ def Otp(request, id):
                                 u_pass=Info.objects.get(id=id)
                                 c_pass = u_pass.Password
 
-                                if not c_pass(pw1, c_pass):
+                                if pw1 is not u_pass:
+                                    print('came here7')
+                                    u_pass.Password = pw1
+                                    u_pass.save()
 
-                                   u_pass.Password = pw1
-                                   u_pass.save()
-
-                                   try:
+                                    try:
                                        Uss = Info.objects.get(Email=u_pass.Email)
                                        Uss.password = make_password(pw1)
                                        Uss.save()
                                        print("Came here")
                                        return redirect(login)
 
-                                   except Info.DoesNotExist:
+                                    except Info.DoesNotExist:
                                        return HttpResponse('Django Auth User not found.')
 
                                 else:
