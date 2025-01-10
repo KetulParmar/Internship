@@ -34,14 +34,18 @@ def register(request):
 
 @csrf_protect
 def login(request):
-    form1 = Cap(request.POST)
+    c1 = Cap(request.POST)
     if request.method == 'POST':
         Email = request.POST['email1']
         Password = request.POST['pass1']
         try:
             rC = Info.objects.get(Email=Email)
             if rC.Password == Password:
-                return redirect(home)
+                if c1.is_valid():
+                    return redirect(home)
+                else:
+                    err = "Incorrect captcha!"
+                    return render(request, 'Login.html', context={'err': err})
             else:
                 err = "Incorrect Password!"
                 return render(request, 'Login.html', context={'err': err})
@@ -164,3 +168,6 @@ def delete(request, id):
     data = Info.objects.get(id=id)
     data.delete()
     return redirect(home)
+
+def show(request, id):
+    pass
