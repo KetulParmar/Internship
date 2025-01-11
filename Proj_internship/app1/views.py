@@ -1,4 +1,7 @@
 from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
@@ -10,6 +13,7 @@ from django.conf import settings
 
 
 # Create your views here.
+@login_required
 def home(request):
     data = Info.objects.all()
     return render(request, 'home.html', {'data': data})
@@ -22,9 +26,12 @@ def register(request):
         Email = request.POST['email']
         Password = request.POST['password']
         Re_password = request.POST['re-password']
+        Hash = make_password(Password)
         if Password == Re_password:
-            data = Info(Name=Name, Email=Email, Password=Password)
+            data = Info(Name=Name, Email=Email, Password=Hash)
             data.save()
+            data2 = User(username=Email, password=Hash)
+            data2.save()
             return redirect(home)
         else:
             err = "Password does not match!!"
@@ -33,15 +40,22 @@ def register(request):
 
 
 @csrf_protect
-def login(request):
+def Login(request):
     c1 = Cap(request.POST)
     if request.method == 'POST':
         Email = request.POST['email1']
         Password = request.POST['pass1']
         try:
-            rC = Info.objects.get(Email=Email)
-            if rC.Password == Password:
+            us = User.objects.get(username=Email)
+            print('1')
+            cc = authenticate(username=Email, password=Password)
+            print('2')
+            if us is not None:
+                print('3')
                 if c1.is_valid():
+                    print('4')
+                    login(request, cc)
+                    print('5')
                     return redirect(home)
                 else:
                     err = "Incorrect captcha!"
@@ -52,7 +66,7 @@ def login(request):
         except:
             err = "Something went wrong"
             return render(request, 'Login.html', context={'err': err})
-    return render(request, 'Login.html')
+    return render(request, 'Login.html', {'c1': c1})
 
 
 def forget(request, id):
@@ -75,7 +89,7 @@ def forget(request, id):
                 )
                 print(otp)
                 red = redirect(f'/otp/{id}')
-                red.set_cookie('Otp12', True, max_age=200)
+                red.set_cookie('Otp12', True, max_age=1000)
                 return red
 
             else:
@@ -108,7 +122,7 @@ def Otp(request, id):
                         if pw1 == pw2:
                             try:
                                 print('came here6')
-                                u_pass=Info.objects.get(id=id)
+                                u_pass = Info.objects.get(id=id)
                                 c_pass = u_pass.Password
 
                                 if pw1 is not u_pass:
@@ -117,18 +131,18 @@ def Otp(request, id):
                                     u_pass.save()
 
                                     try:
-                                       Uss = Info.objects.get(Email=u_pass.Email)
-                                       Uss.password = make_password(pw1)
-                                       Uss.save()
-                                       print("Came here")
-                                       return redirect(login)
+                                        Uss = Info.objects.get(Email=u_pass.Email)
+                                        Uss.password = make_password(pw1)
+                                        Uss.save()
+                                        print("Came here")
+                                        return redirect(login)
 
                                     except Info.DoesNotExist:
-                                       return HttpResponse('Django Auth User not found.')
+                                        return HttpResponse('Django Auth User not found.')
 
                                 else:
-                                   err = "You cannot use the old password."
-                                   return render(request, 'otp.html', {'err': err, 'id': id})
+                                    err = "You cannot use the old password."
+                                    return render(request, 'otp.html', {'err': err, 'id': id})
                             except:
                                 return HttpResponse('User ID does not exist.')
                         else:
@@ -148,6 +162,8 @@ def Otp(request, id):
             return render(request, 'otp.html', {'err': err, 'id': id})
     else:
         return render(request, 'otp.html')
+
+
 def edit(request, id):
     data = Info.objects.get(id=id)
     if request.method == 'POST':
@@ -167,7 +183,10 @@ def edit(request, id):
 def delete(request, id):
     data = Info.objects.get(id=id)
     data.delete()
+    """u = User.objects.get(Email=Email)
+    u.delete()"""
     return redirect(home)
+
 
 def show(request, id):
     pass
