@@ -16,7 +16,9 @@ from django.conf import settings
 @login_required
 def home(request):
     data = Info.objects.all()
-    return render(request, 'home.html', {'data': data})
+    total = data.count()
+    print(total)
+    return render(request, 'home.html', {'data': data , 'Total': total},)
 
 
 @csrf_protect
@@ -170,11 +172,13 @@ def edit(request, id):
         Name = request.POST['name']
         Email = request.POST['email']
         Password = request.POST['password']
-
+        Hash = make_password(Password)
         data.Name = Name
         data.Email = Email
-        data.Password = Password
+        data.Password = Hash
         data.save()
+        data2 = User(password=Hash)
+        data2.save()
         return redirect(home)
     else:
         return render(request, 'Edit.html', context={'data': data})
@@ -183,8 +187,8 @@ def edit(request, id):
 def delete(request, id):
     data = Info.objects.get(id=id)
     data.delete()
-    """u = User.objects.get(Email=Email)
-    u.delete()"""
+    u = User.objects.get(username=data.Email)
+    u.delete()
     return redirect(home)
 
 

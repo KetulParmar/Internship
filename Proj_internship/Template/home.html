@@ -131,39 +131,42 @@
                 font-size: 14px; /* Smaller button size on small screens */
             }
         }
-        body{
-            margin-top:20px;
-            background:#FAFAFA;
+
+        /* Order Card Styles */
+        body {
+            margin-top: 20px;
+            background: #FAFAFA;
         }
+
         .order-card {
             color: #fff;
         }
 
         .bg-c-blue {
-            background: linear-gradient(45deg,#4099ff,#73b4ff);
+            background: linear-gradient(45deg, #4099ff, #73b4ff);
         }
 
         .bg-c-green {
-            background: linear-gradient(45deg,#2ed8b6,#59e0c5);
+            background: linear-gradient(45deg, #2ed8b6, #59e0c5);
         }
 
         .bg-c-yellow {
-            background: linear-gradient(45deg,#FFB64D,#ffcb80);
+            background: linear-gradient(45deg, #FFB64D, #ffcb80);
         }
 
         .bg-c-pink {
-            background: linear-gradient(45deg,#FF5370,#ff869a);
+            background: linear-gradient(45deg, #FF5370, #ff869a);
         }
-
 
         .card {
             border-radius: 5px;
-            -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
-            box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+            box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
             border: none;
             margin-bottom: 30px;
-            -webkit-transition: all 0.3s ease-in-out;
             transition: all 0.3s ease-in-out;
+            max-width: 300px; /* Ensure cards don't stretch too wide */
+            width: 80%; /* Ensure responsiveness */
+            margin: 50px; /* Add spacing between cards */
         }
 
         .card .card-block {
@@ -180,7 +183,54 @@
 
         .f-right {
             float: right;
+        }
 
+        /* Flexbox Layout for the Cards (for larger screens) */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center the cards */
+        }
+
+        .card h6 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .card h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        /* Card Icon Size */
+        .order-card i {
+            font-size: 26px;
+        }
+
+        /* Responsiveness for Smaller Screens */
+        @media (max-width: 768px) {
+            .card {
+                max-width: 100%; /* Allow cards to take full width on smaller screens */
+                margin-bottom: 15px; /* Space between cards */
+            }
+
+            .card h2 {
+                font-size: 24px; /* Adjust font size for smaller screens */
+            }
+
+            .card p {
+                font-size: 14px;
+            }
+
+            .order-card i {
+                font-size: 22px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -193,15 +243,17 @@
             <a href="register">Register</a>
         </div>
     </nav>
+
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-xl-3">
                 <div class="card bg-c-blue order-card">
                     <div class="card-block">
-                        <h6 class="m-b-20">Orders Received</h6>
-                        <h2 class="text-right"><i class="fa fa-cart-plus f-left"></i><span>486</span></h2>
-                        <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                        <h6 class="m-b-20">Total User</h6>
+                        <h2 class="text-right"><i></i><span>{{Total}}</span></h2>
+
                     </div>
                 </div>
             </div>
@@ -210,31 +262,12 @@
                 <div class="card bg-c-green order-card">
                     <div class="card-block">
                         <h6 class="m-b-20">Orders Received</h6>
-                        <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>486</span></h2>
-                        <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
+                        <h2 class="text-right"><i></i><span>486</span></h2>
+
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 col-xl-3">
-                <div class="card bg-c-yellow order-card">
-                    <div class="card-block">
-                        <h6 class="m-b-20">Orders Received</h6>
-                        <h2 class="text-right"><i class="fa fa-refresh f-left"></i><span>486</span></h2>
-                        <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-xl-3">
-                <div class="card bg-c-pink order-card">
-                    <div class="card-block">
-                        <h6 class="m-b-20">Orders Received</h6>
-                        <h2 class="text-right"><i class="fa fa-credit-card f-left"></i><span>486</span></h2>
-                        <p class="m-b-0">Completed Orders<span class="f-right">351</span></p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
