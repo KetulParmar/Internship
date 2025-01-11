@@ -39,7 +39,7 @@ def register(request):
     return render(request, 'Register.html')
 
 
-@csrf_protect
+
 def Login(request):
     c1 = Cap(request.POST)
     if request.method == 'POST':
@@ -188,5 +188,7 @@ def delete(request, id):
     return redirect(home)
 
 
-def show(request, id):
+def Logout(request, id):
+    data = Info.objects.get(id=id)
+    logout(request, data)
     pass
