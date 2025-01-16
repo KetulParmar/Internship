@@ -193,6 +193,5 @@ def delete(request, id):
 
 
 def Logout(request, id):
-    data = Info.objects.get(id=id)
-    logout(request, data)
+    logout(request)
     pass

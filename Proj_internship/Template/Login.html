@@ -104,6 +104,9 @@
         <a href="forget/3"><h2>Forget Password</h2></a>
         <div class="register-link">
             <p>Don't have an account? <a href="register">Register here</a></p>
+             <p>
+                <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login With Google</a>
+            </p>
         </div>
     </div>
 
